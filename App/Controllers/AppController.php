@@ -84,7 +84,12 @@ class AppController extends Action
         
     }
     public function removerTweet(){
-        var_dump($_GET);
+        $tweet = Container::getModel('tweet');
+        $tweet->__set('id',$_GET['id']);
+       
+        if ( $tweet->delete() > 0) {
+            \header('location:/timeline');
+        }
     }
 
 }
