@@ -71,7 +71,7 @@ class Usuario extends Model
         $query = 'SELECT * FROM usuarios WHERE email = :email AND senha = :senha';
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(':email', $this->__get('email'));
-        $stmt->bindValue(':senha', $this->__get('senha'));
+        $stmt->bindValue(':senha',$this->__get('senha'));
         $stmt->execute();
         $usuario = $stmt->fetch(\PDO::FETCH_ASSOC);
 
@@ -138,6 +138,52 @@ class Usuario extends Model
 
         return true;
     }
+    /**
+     * MÉTODO RESPONSÁVEL POR BUSCAR AS INFORMAÇÕES DO USUARIO
+     */
+    public function getInfoUsuario()
+    {
+        $query = "select nome from usuarios where id = :id_usuario";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':id_usuario',$this->__get('id'));
+        $stmt->execute();
+
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+     /**
+     * MÉTODO RESPONSÁVEL POR BUSCAR O TOTAL DE TWEETS
+     */
+    public function getTotoalTweets()
+    {
+        $query = "select count(*) as total_tweets from tweets where id_usuario = :id_usuario";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':id_usuario',$this->__get('id'));
+        $stmt->execute();
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+     /**
+     * MÉTODO RESPONSÁVEL POR BUSCAR O TOTAL DE USUARIOS QUE ESTA SEGUINDO
+     */
+    public function getTotoalSeguindo()
+    {
+        $query = "select count(*) as total_seguindo from usuarios_seguidores where id_usuario = :id_usuario";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':id_usuario',$this->__get('id'));
+        $stmt->execute();
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+     /**
+     * MÉTODO RESPONSÁVEL POR BUSCAR O TOTAL DE USUARIOS QUE ESTA SEGUINDO-ME
+     */
+    public function getTotoalSeguidores()
+    {
+        $query = "select count(*) as total_seguidores from usuarios_seguidores where id_usuario_seguindo = :id_usuario";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':id_usuario',$this->__get('id'));
+        $stmt->execute();
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
    
 }
 
