@@ -8,9 +8,9 @@ class Connection {
 		try {
 
 			$conn = new \PDO(
-				"mysql:host=localhost;dbname=twitter_clone;charset=utf8",
-				"carloslima",
-				"admcarlos" 
+				"mysql:host=*******;dbname=*****;charset=utf8",
+				"******",
+				"*******" 
 			);
 
 			return $conn;
@@ -22,3 +22,31 @@ class Connection {
 }
 
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
